@@ -13,6 +13,6 @@
             "Rohmadst\\Kodegenerator\\": "src",
         }
     },
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "require": {}
 }
