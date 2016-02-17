@@ -37,5 +37,19 @@ Tanda bahwa install berhasil, adalah akan ada baris perintah berikut:
     kode:resource
 ```
 
+Sebagai test bahwa composer sudah terinstall dengan benar, silahkan coba:
+```bash
+    kode:resource Foo Foo
+```
+
+pada saat anda menjalankan perintah melalui terminal:
+- `masukkan nama tabel`
+- `masukkan field.`
+
+Sebagai contoh, ketika diminta menambahkan fields, ketik:
+```bash
+    nama:string, pekerjaan:string, usia:integer, alamat:string:nullable()->default(null)     
+```
+
 Baiklah, semoga kontribusi sederhana saya ini bisa berguna buat para pengembang Laravel dimana pun berada.
 Terima kasih.
