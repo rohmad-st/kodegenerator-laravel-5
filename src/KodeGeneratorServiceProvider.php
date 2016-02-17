@@ -11,9 +11,7 @@ class KodeGeneratorServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->publishes([
-            __DIR__ . '/../config/kodegenerator.php' => config_path('kodegenerator.php'),
-        ]);
+        $this->publishes([__DIR__ . '/../config/kodegenerator.php' => config_path('kodegenerator.php'),]);
     }
 
     /**

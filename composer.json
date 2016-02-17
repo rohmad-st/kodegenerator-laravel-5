@@ -8,11 +8,11 @@
             "email": "rohmadsasmito@gmail.com"
         }
     ],
-    "require": {},
     "autoload": {
         "psr-4": {
-            "Rohmadst\\Kodegenerator\\": "src"
+            "Rohmadst\\Kodegenerator\\": "src",
         }
     },
-    "minimum-stability": "stable"
+    "minimum-stability": "stable",
+    "require": {}
 }
