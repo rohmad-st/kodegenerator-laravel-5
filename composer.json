@@ -19,7 +19,7 @@
             "email": "rohmadsasmito@gmail.com"
         }
     ],
-    "require-dev": {
+    "require": {
         "laravel/framework": ">=5.0.0"
     },
     "autoload": {
