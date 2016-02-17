@@ -1,6 +1,6 @@
 {
     "name": "rohmadst/kodegenerator",
-    "description": "Dinamic CRUD Generator for Laravel 5 above.",
+    "description": "CRUD Generator (Migration, Controller, Repository, Model, Form Request) in single command for Laravel 5 above.",
     "license": "MIT",
     "authors": [
         {
