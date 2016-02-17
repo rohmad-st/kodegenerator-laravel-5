@@ -74,23 +74,31 @@ class KodeResource extends KodeCommand
             $fields_repository .= "'" . $field_name . "' => \$data['" . $field_name . "'],\n";
             $fields_model .= "'" . $field_name . "',\n";
 
-            $status = 'required';
+            preg_match('/nullable/', $field_optional, $matches);
+            $required = '';
+            if ($matches) {
+                $required = 'required|';
+            }
+
             switch ($field_type) {
                 case 'string' :
-                    $status = 'required|max:255';
+                    $status = $required . 'max:255';
                     break;
                 case 'integer':
-                    $status = 'required|integer|max:10000000000';
+                    $status = $required . 'integer|max:10000000000';
                     break;
                 case 'double':
-                    $status = 'required|numeric|max:10000000000';
+                    $status = $required . 'numeric|max:10000000000';
                     break;
                 case 'smallInteger':
-                    $status = 'required|integer|max:10';
+                case 'tinyInteger':
+                    $status = $required . 'integer|max:10';
                     break;
                 case 'boolean':
-                    $status = 'required|boolean';
+                    $status = $required . 'boolean';
                     break;
+                default:
+                    $status = $required . 'max:225';
             }
 
             // for request
@@ -105,11 +113,11 @@ class KodeResource extends KodeCommand
 
         }
 
-        // generate request
+        // generate
         $this->kodeGenerateMigrate($name, $table, $fields_migrate); //migrate
         $this->kodeGenerateController($name, $prefix); //controller
         $this->kodeGenerateRepository($name, $table, $fields_repository, $prefix, $field_search); //repository
         $this->kodeGenerateModel($name, $table, $fields_model, $prefix); // model
-        $this->kodeGenerateRequest($name, $fields_rules, $fields_attr, $fields_input, $prefix, $field_validate); // request
+        $this->kodeGenerateRequest($name, $fields_rules, $fields_attr, $fields_input, $prefix, $field_validate); // form request
     }
 }
