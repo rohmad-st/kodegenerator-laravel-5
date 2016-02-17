@@ -1,6 +1,17 @@
 {
     "name": "rohmadst/kodegenerator",
     "description": "CRUD Generator (Migration, Controller, Repository, Model, Form Request) in single command for Laravel 5 above.",
+    "keywords": [
+        "laravel 5",
+        "model",
+        "migration",
+        "controller",
+        "repository",
+        "scaffold",
+        "CRUD",
+        "generator",
+        "resource"
+    ],
     "license": "MIT",
     "authors": [
         {
