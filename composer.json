@@ -19,6 +19,10 @@
             "email": "rohmadsasmito@gmail.com"
         }
     ],
+    "require": {
+        "php": ">=5.5.9",
+        "illuminate/support": "5.1.*"
+    },
     "autoload": {
         "psr-4": {
             "Rohmadst\\Kodegenerator\\": "src"
