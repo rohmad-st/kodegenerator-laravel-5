@@ -13,6 +13,5 @@
             "Rohmadst\\Kodegenerator\\": "src"
         }
     },
-    "minimum-stability": "dev",
-    "require": {}
+    "minimum-stability": "dev"
 }
