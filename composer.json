@@ -8,9 +8,7 @@
             "email": "rohmadsasmito@gmail.com"
         }
     ],
-    "require": {
-        "illuminate/console": "5.1.* || 5.2.*"
-    },
+    "require": {},
     "autoload": {
         "psr-4": {
             "Rohmadst\\Kodegenerator\\": "src"
