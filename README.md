@@ -14,6 +14,11 @@ Buka `composer.json`, lalu tambahkan kode seperti berikut:
 
 Lalu jalankan `sudo composer update`
 
+Atau anda bisa buka terminal, dan ketikkan:
+```bash
+     sudo composer require rohmadst/kodegenerator dev-master
+```
+
 Setelah composer update sudah selesai dan terinstall dengan baik.
 Buka `config/app.php`, tambahkan baris kode berikut pada group array providers .
 
@@ -22,7 +27,7 @@ Buka `config/app.php`, tambahkan baris kode berikut pada group array providers .
 ```
 
 Setelah itu jalankan perintah berikut, kode ini akan mengcopy file kodegenerator.php ke app/config, 
-sehingga nanti anda bisa ubah lokasi masing-masing file.:
+sehingga nanti anda bisa ubah lokasi masing-masing file:
 ```bash
     php artisan vendor:publish
 ```
