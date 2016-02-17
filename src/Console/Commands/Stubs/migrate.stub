@@ -1,0 +1,39 @@
+<?php
+
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class CreateTable{{namespace}} extends Migration
+{
+
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('{{var_table}}', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
+
+            $table->string('_id');
+            {{var_field}}
+
+            $table->timestamps();
+            $table->index(['_id']);
+            $table->primary('_id');
+            $table->softDeletes();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::drop('{{var_table}}');
+    }
+
+}

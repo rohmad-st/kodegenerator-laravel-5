@@ -1,0 +1,157 @@
+<?php namespace App\Domain\Repositories\{{prefix}};
+
+use App\Domain\Contracts\Cacheable;
+use App\Domain\Contracts\Crudable;
+use App\Domain\Contracts\Paginable;
+use App\Domain\Entities\{{prefix}}\{{namespace}};
+use App\Domain\Repositories\AbstractRepository;
+use Illuminate\Support\Facades\Log;
+
+class {{namespace}}Repository extends AbstractRepository implements Crudable, Paginable
+{
+
+    /**
+     * @var Cacheable
+     */
+    protected $cache;
+
+    /**
+     * @param {{namespace}}      ${{var_namespace}}
+     * @param Cacheable $cache
+     */
+    public function __construct({{namespace}} ${{var_namespace}}, Cacheable $cache)
+    {
+        $this->model = ${{var_namespace}};
+        $this->cache = $cache;
+    }
+
+    /**
+     * @param int   $id
+     * @param array $columns
+     *
+     * @return \Illuminate\Database\Eloquent\Model
+     */
+    public function find($id, array $columns = ['*'])
+    {
+        // set key
+        $key = '{{var_tags}}-find-' . $id;
+
+        // has section and key
+        if ($this->cache->has({{namespace}}::$tags, $key)) {
+            return $this->cache->get({{namespace}}::$tags, $key);
+        }
+
+        // query to sql
+        $result = parent::find($id, $columns);
+
+        // store to cache
+        $this->cache->put({{namespace}}::$tags, $key, $result, 10);
+
+        return $result;
+    }
+
+    /**
+     * @param array $data
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function create(array $data)
+    {
+        try {
+            // execute sql insert
+            $result = parent::create([
+                {{var_field}}
+            ]);
+
+            // flush cache with tags
+            $this->cache->flush({{namespace}}::$tags);
+
+            return $result;
+
+        } catch (\Exception $e) {
+            // store errors to log
+            Log::error('class : ' . {{namespace}}Repository::class . ' method : create | ' . $e);
+
+            return $this->createError();
+        }
+
+    }
+
+    /**
+     * @param       $id
+     * @param array $data
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function update($id, array $data)
+    {
+        try {
+            $result = parent::update($id, [
+                {{var_field}}
+            ]);
+
+            // flush cache with tags
+            $this->cache->flush({{namespace}}::$tags);
+
+            return $result;
+
+        } catch (\Exception $e) {
+            // store errors to log
+            Log::error('class : ' . {{namespace}}Repository::class . ' method : update | ' . $e);
+
+            return $this->updateError();
+        }
+    }
+
+    /**
+     * @param $id
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function delete($id)
+    {
+        try {
+            $result = parent::delete($id);
+
+            // flush cache with tags
+            $this->cache->flush({{namespace}}::$tags);
+
+            return $result;
+
+        } catch (\Exception $e) {
+            // store errors to log
+            Log::error('class : ' . {{namespace}}Repository::class . ' method : delete | ' . $e);
+
+            return $this->deleteError();
+        }
+    }
+
+    /**
+     * @param int    $limit
+     * @param int    $page
+     * @param array  $column
+     * @param string $field
+     * @param string $search
+     *
+     * @return \Illuminate\Pagination\Paginator
+     */
+    public function getByPage($limit = 10, $page = 1, array $column = ['*'], $field, $search = '')
+    {
+        // set key
+        $key = '{{var_tags}}-get-by-page-' . $page . $limit . $search;
+
+        // has section and key
+        if ($this->cache->has({{namespace}}::$tags, $key)) {
+            return $this->cache->get({{namespace}}::$tags, $key);
+        }
+
+        // query to sql
+        $result = parent::getByPageOrderBy($limit, $page, $column, '{{var_search}}', $search, '{{var_search}}');
+
+        // store to cache
+        $this->cache->put({{namespace}}::$tags, $key, $result, 10);
+
+        return $result;
+    }
+
+}

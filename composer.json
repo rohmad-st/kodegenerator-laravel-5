@@ -1,0 +1,20 @@
+{
+    "name": "rohmadst/kodegenerator",
+    "description": "Dinamic CRUD Generator for Laravel 5 above.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "rohmad-st",
+            "email": "rohmadsasmito@gmail.com"
+        }
+    ],
+    "require": {
+        "illuminate/console": "5.1.* || 5.2.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Rohmadst\\Kodegenerator\\": "src"
+        }
+    },
+    "minimum-stability": "dev"
+}

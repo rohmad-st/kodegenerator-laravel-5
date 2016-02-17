@@ -1,0 +1,87 @@
+<?php namespace App\Http\Controllers\Api\V1\{{prefix}};
+
+use App\Domain\Repositories\{{prefix}}\{{namespace}}Repository;
+use Illuminate\Http\Request;
+use App\Http\Requests;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\{{prefix}}\{{namespace}}FormRequest;
+
+class {{namespace}}Controller extends Controller
+{
+
+    /**
+     * @var {{namespace}}Repository
+     */
+    protected ${{var_namespace}};
+
+    /**
+     * @param {{namespace}}Repository ${{var_namespace}}
+     */
+    public function __construct({{namespace}}Repository ${{var_namespace}})
+    {
+        $this->{{var_namespace}} = ${{var_namespace}};
+        $this->middleware('jwt.auth', ['except' => ['index']]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @param Request $request
+     *
+     * @return mixed
+     */
+    public function index(Request $request)
+    {
+        return $this->{{var_namespace}}->getByPage(10, $request->input('page'), $column = ['*'], $key = '', $request->input('term'));
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  {{namespace}}FormRequest $request
+     *
+     * @return mixed
+     */
+    public function store({{namespace}}FormRequest $request)
+    {
+        return $this->{{var_namespace}}->create($request->all());
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int $id
+     *
+     * @return mixed
+     */
+    public function show($id)
+    {
+        return $this->{{var_namespace}}->find($id);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  {{namespace}}FormRequest $request
+     * @param  int             $id
+     *
+     * @return mixed
+     */
+    public function update({{namespace}}FormRequest $request, $id)
+    {
+        return $this->{{var_namespace}}->update($id, $request->all());
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int $id
+     *
+     * @return mixed
+     */
+    public function destroy($id)
+    {
+        return $this->{{var_namespace}}->delete($id);
+    }
+
+}

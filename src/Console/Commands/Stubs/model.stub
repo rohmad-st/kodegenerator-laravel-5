@@ -1,0 +1,105 @@
+<?php namespace App\Domain\Entities\{{prefix}};
+
+use App\Domain\Entities\UuidModel;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
+class {{namespace}} extends UuidModel
+{
+
+    use SoftDeletes;
+
+    /**
+     * Section for redis storage
+     *
+     * @var string
+     */
+    public static $tags = '{{var_tags}}';
+
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */
+    protected $table = '{{var_table}}';
+
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */
+
+    protected $dates = ['deleted_at'];
+
+    /**
+     * The relations to eager load on every query.
+     *
+     * @var string
+     */
+    //protected $with = ['relationship'];
+
+    /**
+     * The attributes that aren't mass assignable.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+        'deleted_at',
+        'user_creator',
+        'user_updater'
+    ];
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        {{var_fillable}}
+    ];
+
+    /**
+     * Primary Key by the table
+     *
+     * @var string
+     */
+    protected $primaryKey = '_id';
+
+    /**
+     * Boot the Model
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        /**
+         * Attach to the 'creating' Model Event to provide a UUID
+         * for the `id` field (provided by $model->getKeyName())
+         */
+        static::creating(function ($model) {
+            // flush the cache section
+            \Cache::section({{namespace}}::$tags)->flush();
+        });
+
+        static::updating(function ($model) {
+            // flush the cache section
+            \Cache::section({{namespace}}::$tags)->flush();
+        });
+
+        static::deleting(function ($model) {
+            // flush the cache section
+            \Cache::section({{namespace}}::$tags)->flush();
+        });
+    }
+
+    /**
+     * Define an inverse one-to-one or many relationship.
+     *
+     * @return mixed
+     */
+    //public function relationship()
+    //{
+    //    return $this->belongsTo('App\Domain\Entities\{Namespace}\{Model}', '{id}');
+    //}
+}
