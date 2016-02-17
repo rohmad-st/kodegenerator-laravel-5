@@ -1,27 +1,33 @@
-# kodegenerator-laravel-5
+# CRUD Generator Laravel 5 above
 Generator Migration, Controller, Repository, Model, Form Request in single command for Laravel 5 above
 
 ##Install
 
-Buka terminal, lalu ketikkan:
+Buka `composer.json`, lalu tambahkan kode seperti berikut:
 
 ```bash 
-    sudo composer require rohmadst/kodegenerator
+    "require": {
+        ...
+        "rohmadst/kodegenerator": "dev-master"
+    },
 ```
 
-Setelah composer sudah selesai terinstall dengan baik.
-Sekarang buka `config/app.php`, tambahkan baris kode berikut di group array providers .
+Lalu jalankan `sudo composer update`
+
+Setelah composer update sudah selesai dan terinstall dengan baik.
+Buka `config/app.php`, tambahkan baris kode berikut pada group array providers .
 
 ```bash
     Rohmadst\Kodegenerator\KodeGeneratorServiceProvider::class
 ```
 
-Setelah itu jalankan perintah berikut untuk copy file kodegenerator.php ke app/config:
+Setelah itu jalankan perintah berikut, kode ini akan mengcopy file kodegenerator.php ke app/config, 
+sehingga nanti anda bisa ubah lokasi masing-masing file.:
 ```bash
     php artisan vendor:publish
 ```
 
-Cek apakah sudah berhasil dengan cara:
+Cek apakah composer sudah terinstall:
 ```bash
     php artisan list
 ```
