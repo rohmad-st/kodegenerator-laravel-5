@@ -39,7 +39,8 @@ Cek apakah composer sudah terinstall:
 
 Tanda bahwa install berhasil, adalah akan ada baris perintah berikut:
 ```bash
-    kode:resource
+    - kode:query {name} {prefix}
+    - kode:resource {name} {prefix}
 ```
 
 Sebagai test bahwa composer sudah terinstall dengan benar, silahkan coba:
