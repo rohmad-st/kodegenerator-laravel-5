@@ -1,5 +1,5 @@
 # CRUD Generator Laravel 5 above
-Generator Migration, Controller, Repository, Model, Form Request in single command for Laravel 5 above
+Generator Migration, Controller, Repository, Model, Form Request in single command for Laravel 5 above (RestFul API)
 
 ##Install
 
@@ -32,6 +32,8 @@ sehingga nanti anda bisa ubah lokasi masing-masing file:
     php artisan vendor:publish
 ```
 
+##Cara Menggunakan
+
 Cek apakah composer sudah terinstall:
 ```bash
     php artisan list
@@ -39,8 +41,8 @@ Cek apakah composer sudah terinstall:
 
 Tanda bahwa install berhasil, adalah akan ada baris perintah berikut:
 ```bash
-    - kode:query {name} {prefix}
-    - kode:resource {name} {prefix}
+    - kode:query {name} {prefix}        -> untuk menambahkan satu service
+    - kode:resource {name} {prefix}     -> untuk menambahkan full resource (migrate, controller, repository, model, form request)
 ```
 
 Sebagai test bahwa composer sudah terinstall dengan benar, silahkan coba:
@@ -59,3 +61,18 @@ Sebagai contoh, ketika diminta menambahkan fields, ketik:
 
 Baiklah, semoga kontribusi sederhana saya ini bisa berguna buat para pengembang Laravel dimana pun berada.
 Terima kasih.
+
+****
+
+```bash
+NB. template yang saya gunakan secara default terintegrasi dengan cache redis, dan full RESTFul API.
+akan tetapi template bisa diedit dan disesuaikan dengan kebutuhan developer.
+
+templates
+```
+
+Bila ada kritik/saran/pertanyaan silahkan menghubungi saya di:
+```bash
+    Email: rohmadsasmito@gmail.com
+    Skype: rohmad.st
+```
