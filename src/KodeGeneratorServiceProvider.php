@@ -22,7 +22,8 @@ class KodeGeneratorServiceProvider extends ServiceProvider
     public function register()
     {
         $this->commands([
-            'Rohmadst\Kodegenerator\Console\Commands\KodeResource'
+            'Rohmadst\Kodegenerator\Console\Commands\KodeResource',
+            'Rohmadst\Kodegenerator\Console\Commands\KodeQuery'
         ]);
 
     }

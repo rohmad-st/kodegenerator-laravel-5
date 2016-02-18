@@ -105,4 +105,89 @@ class Kode extends Command
         // add string text
         return preg_replace($patterns, $replacements, $str);
     }
+
+    /**
+     * Replace character in templates query controller
+     *
+     * @param         $str
+     * @param         $namespace
+     * @param         $name_function
+     * @param boolean $is_request
+     *
+     * @return mixed
+     */
+    public function regexQueryController($str, $namespace, $name_function, $is_request = false)
+    {
+        $request = '';
+        $param_request = '';
+        $var_request = '';
+        if ($is_request == true) {
+            $request = "Request \$request";
+            $param_request = "@param\tRequest \$request";
+            $var_request = "\$request->all()";
+        }
+
+        $patterns = ['/{{param_request}}/', '/{{name_function}}/', '/{{request}}/', '/{{var_namespace}}/', '/{{var_request}}/'];
+        $replacements = [$param_request, $name_function, $request, lcfirst($namespace), $var_request];
+
+        // add string text
+        return preg_replace($patterns, $replacements, $str);
+    }
+
+    /**
+     * Replace character in templates repository
+     *
+     * @param         $str
+     * @param         $namespace
+     * @param         $table
+     * @param         $select
+     * @param         $join
+     * @param         $name_function
+     * @param boolean $is_request
+     *
+     * @return mixed
+     */
+    public function regexQueryRepository($str, $namespace, $table, $select, $join, $name_function, $is_request = false)
+    {
+        $request = '';
+        $param_request = '';
+        $var_request = '';
+        if ($is_request == true) {
+            $request = "Request \$request";
+            $param_request = "@param\tRequest \$request";
+            $var_request = "\$request->all()";
+        }
+
+        $patterns = [
+            '/{{namespace}}/',
+            '/{{param_request}}/',
+            '/{{var_table}}/',
+            '/{{var_select}}/',
+            '/{{var_join}}/',
+            '/{{name_function}}/',
+            '/{{request}}/',
+            '/{{var_namespace}}/',
+            '/{{var_request}}/',
+            '/{{var_tags}}/',
+            '/{{tags_function}}/'
+        ];
+
+        $replacements = [
+            $namespace,
+            $param_request,
+            $table,
+            $select,
+            $join,
+            $name_function,
+            $request,
+            lcfirst($namespace),
+            $var_request,
+            preg_replace('/_/', '-', $table),
+            strtolower($name_function)
+        ];
+
+        // add string text
+        return preg_replace($patterns, $replacements, $str);
+    }
+
 }

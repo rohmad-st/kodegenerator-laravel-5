@@ -23,6 +23,11 @@ class KodeCommand extends Kode
         // location path file
         $folder_migrate = base_path(config('kodegenerator.source.root_migrate'));
 
+        if (!is_dir($folder_migrate)) {
+            //create folder
+            File::makeDirectory($folder_migrate, 0775, true);
+        }
+
         // file
         $migrate_name = date('Y_m_d_His') . '_create_table_' . $table;
         $file_migrate = $folder_migrate . '/' . $migrate_name . '.php';
@@ -168,6 +173,85 @@ class KodeCommand extends Kode
 
         // Info
         $this->info('Request: ' . $file_request . ' created successfully.');
+    }
+
+    /**
+     * Generate method in controller
+     *
+     * @param         $namespace
+     * @param         $prefix
+     * @param         $name_function
+     * @param boolean $is_request
+     */
+    public function kodeGenerateQueryController($namespace, $prefix, $name_function, $is_request = false)
+    {
+
+        // location path file
+        $folder_controller = base_path(config('kodegenerator.source.root_controller') . '/Api/' . config('kodegenerator.source.api_version') . '/' . $prefix);
+
+        if (!is_dir($folder_controller)) {
+            //create folder
+            File::makeDirectory($folder_controller, 0775, true);
+        }
+
+        // file
+        $file_controller = $folder_controller . '/' . $namespace . 'Controller.php';
+
+        // get file templates
+        $controller = file_get_contents($file_controller);
+        $controller_new = file_get_contents(__DIR__ . '/Stubs/query_controller.stub');
+
+        $controller_new = $this->regexQueryController($controller_new, $namespace, $name_function, $is_request);
+
+        // last of result
+        $controller = preg_replace(['/{{kodegenerator}}/'], [$controller_new], $controller);
+
+        // update file
+        File::put($file_controller, $controller);
+
+        // Info
+        $this->info('Controller: ' . $file_controller . ' updated successfully.');
+    }
+
+    /**
+     * Generate method query builder in repository
+     *
+     * @param         $namespace
+     * @param         $table
+     * @param         $select
+     * @param         $join
+     * @param         $name_function
+     * @param         $prefix
+     * @param boolean $is_request
+     */
+    public function kodeGenerateQueryRepository($namespace, $table, $select, $join, $name_function, $prefix, $is_request = false)
+    {
+        // location path file
+        $folder_repository = base_path(config('kodegenerator.source.root_repository') . '/' . $prefix);
+
+        if (!is_dir($folder_repository)) {
+            //create folder
+            File::makeDirectory($folder_repository, 0775, true);
+        }
+
+        // file
+        $file_repository = $folder_repository . '/' . $namespace . 'Repository.php';
+
+        // get file templates
+        $repository = file_get_contents($file_repository);
+        $repository_new = file_get_contents(__DIR__ . '/Stubs/query_repository.stub');
+
+        // replace character
+        $repository_new = $this->regexQueryRepository($repository_new, $namespace, $table, $select, $join, $name_function, $is_request);
+
+        // last of result
+        $repository = preg_replace(['/{{kodegenerator}}/'], [$repository_new], $repository);
+
+        // create file
+        File::put($file_repository, $repository);
+
+        // Info
+        $this->info('Repository: ' . $file_repository . ' updated successfully.');
     }
 
 }

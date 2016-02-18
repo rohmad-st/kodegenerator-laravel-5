@@ -1,0 +1,34 @@
+
+    /**
+     * {{param_request}}
+     *
+     * @return mixed
+     */
+    public function {{name_function}}({{request}})
+    {
+        // set key
+        $key = '{{var_tags}}-{{tags_function}}';
+
+        // has section and key
+        if ($this->cache->has({{namespace}}::$tags, $key)) {
+            return $this->cache->get({{namespace}}::$tags, $key);
+        }
+
+        // query from {{var_table}}
+        $result = \DB::table('{{var_table}}')
+            ->where(function ($query) use ($term) {
+                $query->where('term', 'like', '%'. $term .'%')
+                    ->whereNull('{{var_table}}.deleted_at');
+            })
+            {{var_join}}
+            //->join('rkpdes', 'belanja.rkpdes_id', '=', 'rkpdes._id')
+            {{var_select}}
+            //->orderBy(\DB::raw('ABS(bidang.kode_rekening)'))
+            ->orderBy('{{var_table}}.created_at', 'desc')
+            ->get();
+
+        // store to cache
+        $this->cache->put({{namespace}}::$tags, $key, $result, 10);
+
+        return $result;
+    }

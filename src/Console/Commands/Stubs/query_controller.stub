@@ -1,0 +1,10 @@
+
+    /**
+     * {{param_request}}
+     *
+     * @return mixed
+     */
+    public function {{name_function}}({{request}})
+    {
+        return $this->{{var_namespace}}->{{name_function}}({{var_request}});
+    }
