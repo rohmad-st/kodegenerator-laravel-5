@@ -1,6 +1,9 @@
 # CRUD Generator Laravel 5 above
 Generator Migration, Controller, Repository, Model, Form Request in single command for Laravel 5 above (RestFul API)
 
+##Demo
+> [Lihat demo video](https://goo.gl/vUj0RX)
+
 ##Install
 
 Buka `composer.json`, lalu tambahkan kode seperti berikut:
