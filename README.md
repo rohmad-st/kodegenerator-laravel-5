@@ -68,7 +68,6 @@ Terima kasih.
 NB. template yang saya gunakan secara default terintegrasi dengan cache redis, dan full RESTFul API.
 akan tetapi template bisa diedit dan disesuaikan dengan kebutuhan developer.
 
-templates
 ```
 
 Bila ada kritik/saran/pertanyaan silahkan menghubungi saya di:
