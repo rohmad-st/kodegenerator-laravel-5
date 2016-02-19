@@ -20,6 +20,10 @@
         }
     ],
     "require": {
+        "php": ">=5.4.0",
+        "tymon/jwt-auth": "0.5.*",
+        "webpatser/laravel-uuid": "2.*",
+        "predis/predis": "^1.0"
     },
     "autoload": {
         "psr-4": {
